@@ -10,7 +10,7 @@ services:
     container_name: drupal
     build:
           context: .
-          dockerfile: drupal/docker-containerdrup
+          dockerfile: ./drupal/docker-containerdrup
     ports:
       - 8787:80
     volumes:
