@@ -1,0 +1,3 @@
+administer breadcrumbs visibility config:
+  title: 'Configure breadcrumbs visibility'
+  description: 'Set whether breadcrumbs display on a per content type or per node basis.'

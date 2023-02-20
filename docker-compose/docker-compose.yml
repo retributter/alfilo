@@ -1,0 +1,61 @@
+# Drupal with MySQL
+#
+# ADVANCED OPTIONS; Database host: docker inspect mysql-drupal | grep IP
+
+version: '3.1'
+
+services:
+
+  drupal:
+    container_name: drupal
+    build:
+          context: .
+          dockerfile: drupal/docker-containerdrup
+    ports:
+      - 8787:80
+    volumes:
+      - ./drupal/modules:/var/www/html/modules
+      - ./drupal/profiles:/var/www/html/profiles
+      - ./drupal/themes:/var/www/html/themes
+      # this takes advantage of the feature in Docker that a new anonymous
+      # volume (which is what we're creating here) will be initialized with the
+      # existing content of the image at the same location
+      - ./sites:/var/www/html/sites
+    networks:
+      drupal-net:
+        ipv4_address: 172.25.0.5
+    tty: true
+
+  mysql:
+    container_name: mysql-drupal
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    env_file:
+      - sql-file.env
+    volumes:
+     - ./docker/drupal-db:/var/lib/mysql
+    networks:
+      drupal-net:
+        ipv4_address: 172.25.0.6
+    restart: always
+
+  front:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: ./front/docker-front
+    ports:
+    - 80:80
+    networks:
+      drupal-net:
+        ipv4_address: 172.25.0.7
+    tty: true
+
+networks:
+  drupal-net:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.25.0.0/16
+         gateway: 172.25.0.1
