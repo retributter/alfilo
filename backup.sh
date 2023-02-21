@@ -15,21 +15,21 @@ else
 fi
 }
 directoryCreator(){
-    touch ./log-cron/log-$varDate.md
-    chmod 775 ./log-cron/log-$varDate.md
-    logging="./log-cron/log-$varDate.md"
-    if [ -d "./log-cron/cron-$varDate" ]
+    touch log-cron/log-$varDate.md
+    chmod 775 log-cron/log-$varDate.md
+    logging="log-cron/log-$varDate.md"
+    if [ -d "log-cron/cron-$varDate" ]
     then 
-        mkdir ./log-cron/cron-$varDate-old
-        chmod 775 ./log-cron/cron-$varDate-old
-        cp -r ./log-cron/cron-$varDate /root/log-cron/cron-$varDate-old/
-        rm -r ./log-cron/cron-$varDate
+        mkdir log-cron/cron-$varDate-old
+        chmod 775 log-cron/cron-$varDate-old
+        cp -r log-cron/cron-$varDate log-cron/cron-$varDate-old/
+        rm -r log-cron/cron-$varDate
         directoryCreator
     else
         mkdir cron-$varDate
         chmod 775 cron-$varDate
-        mv cron-$varDate ./log-cron/
-        site="./log-cron/cron-$varDate"
+        mv cron-$varDate log-cron/
+        site="log-cron/cron-$varDate"
     fi
 cronSchedule
 }
