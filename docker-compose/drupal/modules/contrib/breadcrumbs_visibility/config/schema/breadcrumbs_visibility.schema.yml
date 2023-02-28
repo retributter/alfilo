@@ -1,7 +1,0 @@
-breadcrumbs_visibility.content_type.*:
-  type: config_entity
-  label: 'Whether to default breadcrumbs on or off'
-  mapping:
-    display_breadcrumbs:
-      type: boolean
-      label: 'Whether to default breadcrumbs on or off'
