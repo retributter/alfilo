@@ -65,7 +65,7 @@ RUN set -eux; \
 	export COMPOSER_HOME="$(mktemp -d)"; \
 	apt update -y; \
 	apt install git -y; \
-	git clone https://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@github.com/Lother88/WebAlfilo.git .; \
+	git clone https://github.com/Lother88/WebAlfilo.git .; \
 	chown -R www-data:www-data web/sites web/modules web/themes; \
     composer install; \
 	rmdir /var/www/html; \
